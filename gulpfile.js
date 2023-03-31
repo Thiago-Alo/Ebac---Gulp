@@ -9,6 +9,8 @@ const stripJs = require('gulp-strip-comments');
 const stripCss = require('gulp-strip-css-comments');
 const htmlmin = require('html-minifier');
 mime = require('mime');
+const browserSync = require('browser-sync').create();
+const reload = browserSync.reload
 
 function tarefasCSS(cb) {
     gulp.src([
@@ -94,8 +96,10 @@ function end(cb) {
     return cb();
 }
 
+
+
 // series x parallel
-const process = parallel( tarefasHTML, tarefasJS, tarefasCSS, end)
+const process = parallel( tarefasHTML, tarefasJS, tarefasCSS, tarefasImagem, end)
 
 exports.styles = tarefasCSS
 exports.scripts = tarefasJS

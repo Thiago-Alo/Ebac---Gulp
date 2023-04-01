@@ -23,11 +23,13 @@
     "gulp-image": "^6.3.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
     "gulp-strip-comments": "^2.5.2",
     "gulp-strip-css-comments": "^2.0.0",
     "gulp-uglify": "^3.0.2",
     "html-minifier": "^4.0.0",
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "node-sass": "^8.0.0"
   },
   "bugs": {
     "url": "https://github.com/Thiago-Alo/Ebac---Gulp/issues"

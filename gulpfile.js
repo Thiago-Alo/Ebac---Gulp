@@ -2,6 +2,7 @@ const { series, parallel } = require('gulp');
 const babel = require('gulp-babel');
 const gulp = require('gulp');
 const concat = require('gulp-concat');
+const sass = require('gulp-sass') (require('node-sass'));
 const cssmin = require('gulp-cssmin');
 const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
@@ -18,14 +19,22 @@ function tarefasCSS(cb) {
             './node_modules/@fortawesome/fontawesome-free/css/fontawesome.css',
             './vendor/owl/css/owl.css',
             './vendor/jquery-ui/jquery-ui.css',
-            './src/css/style.css',
+            // './src/css/style.css',
         ])
         .pipe(stripCss()) // remove comentários css
-        .pipe(concat('styles.css')) // mescla arquivos
+        .pipe(concat('libs.css')) // mescla arquivos
         .pipe(cssmin()) // minifica css
         .pipe(rename({ suffix: '.min' })) // styles.min.css
         .pipe(gulp.dest('./dist/css')) // cria arquivo em novo diretório
         .on('end', cb); // informa que a tarefa está concluída
+}
+
+function tarefaSASS(cb){
+    gulp.src('./src/scss/**/*.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('./dist/css'))
+    
+        return cb();
 }
 
 function tarefasJS() {
@@ -99,10 +108,11 @@ function end(cb) {
 
 
 // series x parallel
-const process = parallel( tarefasHTML, tarefasJS, tarefasCSS, tarefasImagem, end)
+const process = parallel( tarefasHTML, tarefasJS, tarefasCSS, tarefasImagem, tarefaSASS, end)
 
 exports.styles = tarefasCSS
 exports.scripts = tarefasJS
 exports.images = tarefasImagem
+exports.sass = tarefaSASS
 
 exports.default = process
